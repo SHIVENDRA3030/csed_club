@@ -17,17 +17,10 @@ function App() {
 		window.onbeforeunload = function () {
 			window.scrollTo(0, 0);
 		};
-
-		const fadeDiv = document.getElementById("reload-fade");
-		if (fadeDiv) {
-			setTimeout(() => {
-				fadeDiv.classList.add("hide");
-			}, 100);
-		}
 	}, []);
 	return (
 		<>
-			<div id="reload-fade"></div>
+			<div id="reload-fade" className="hide" style={{ opacity: 0, pointerEvents: "none" }}></div>
 			<Router>
 				<ScrollToTop />
 				<GlassNav />

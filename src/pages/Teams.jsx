@@ -1,6 +1,6 @@
 import React from "react";
-import CSEDClubShowcase from "../components/Team/CSEDClubShowcase.jsx";
+import NeuralTeamsPage from "../components/Team/NeuralTeamsPage.jsx";
 
 export default function Teams() {
-	return <>{<CSEDClubShowcase />}</>;
+	return <NeuralTeamsPage />;
 }

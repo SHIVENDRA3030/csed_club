@@ -1,0 +1,133 @@
+:root {
+	--obsidian: #020408;
+	--vitreous-glow: rgba(0, 163, 255, 0.4);
+	--glass-bg: rgba(255, 255, 255, 0.08);
+	--glass-border: rgba(255, 255, 255, 0.15);
+	--text-primary: #f8fafc;
+}
+
+.events-scroll-container {
+	height: 300vh;
+	background: linear-gradient(to bottom, #020408, #050a15, #020408);
+}
+
+.events-section-wrapper {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+#three-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.events-content-overlay {
+	position: absolute;
+	z-index: 2;
+	width: 100%;
+	max-width: 850px;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.events-glass-card {
+	background: rgba(2, 4, 8, 0.95);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	border: 1px solid rgba(0, 163, 255, 0.3);
+	border-radius: 24px;
+	padding: 60px;
+	box-shadow: 0 0 40px rgba(0, 163, 255, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+	will-change: transform, opacity;
+	width: 100%;
+}
+
+.events-title {
+	font-size: clamp(2.5rem, 5vw, 4rem);
+	font-weight: 800;
+	color: #ffffff;
+	margin-bottom: 24px;
+	letter-spacing: -0.03em;
+	text-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+	line-height: 1.1;
+	will-change: transform, opacity;
+	font-family: "Inter", sans-serif;
+}
+
+.events-description {
+	font-size: 1.25rem;
+	line-height: 1.7;
+	color: #e0e0e0;
+	font-weight: 400;
+	font-family: "Inter", sans-serif;
+}
+
+.events-desc-line {
+	display: block;
+	margin-bottom: 8px;
+	will-change: transform, opacity;
+}
+
+.events-meta-tag {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	color: #00d4ff;
+	letter-spacing: 0.2em;
+	margin-bottom: 16px;
+	display: block;
+	opacity: 0.6;
+}
+
+/* Responsive Mobile Fallback */
+@media (max-width: 768px) {
+	#three-canvas {
+		display: none;
+	}
+
+	.events-section-wrapper {
+		background: radial-gradient(circle at center, #0a192f 0%, #020408 100%);
+	}
+
+	.events-glass-card {
+		padding: 30px;
+		margin: 20px;
+		background: rgba(10, 20, 40, 0.8);
+	}
+
+	.events-title {
+		font-size: 2.5rem;
+	}
+
+	.events-description {
+		font-size: 1rem;
+	}
+
+	.events-meta-tag {
+		font-size: 0.7rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation: none !important;
+		transition: none !important;
+		scroll-behavior: auto !important;
+	}
+}

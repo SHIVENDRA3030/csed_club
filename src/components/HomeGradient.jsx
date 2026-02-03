@@ -1,321 +1,285 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import "./HomeGradient.css";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { scale } from "framer-motion";
-gsap.registerPlugin(ScrollTrigger);
+
+const DeployXMission = () => {
+	const consoleRef = useRef(null);
+	const [networkLoad, setNetworkLoad] = useState(84.2);
+
+	useEffect(() => {
+		const handleMouseMove = (e) => {
+			if (!consoleRef.current) return;
+			const x = (window.innerWidth / 2 - e.clientX) / 25;
+			const y = (window.innerHeight / 2 - e.clientY) / 25;
+			consoleRef.current.style.transform = `rotateY(${-x}deg) rotateX(${y}deg)`;
+		};
+
+		const handleScroll = () => {
+			const scrolled = window.pageYOffset;
+			const topoBackground = document.querySelector(".topo-background");
+			if (topoBackground) {
+				topoBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+			}
+		};
+
+		// Update network load periodically
+		const hudInterval = setInterval(() => {
+			setNetworkLoad((80 + Math.random() * 5).toFixed(1));
+		}, 2000);
+
+		document.addEventListener("mousemove", handleMouseMove);
+		window.addEventListener("scroll", handleScroll);
+
+		return () => {
+			document.removeEventListener("mousemove", handleMouseMove);
+			window.removeEventListener("scroll", handleScroll);
+			clearInterval(hudInterval);
+		};
+	}, []);
+
+	return (
+		<div className="deployx-wrapper">
+			<div className="grain">
+				<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+					<filter id="noiseFilter">
+						<feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+					</filter>
+					<rect width="100%" height="100%" filter="url(#noiseFilter)" />
+				</svg>
+			</div>
+
+			<div className="topo-background"></div>
+			<div className="grid-overlay"></div>
+			<div className="scanner-line"></div>
+
+			<div className="scene">
+				<div className="mission-console" ref={consoleRef}>
+					{/* Left HUD */}
+					<div className="hud-panel panel-left">
+						<span className="hud-label">System Status</span>
+						<div className="hud-value">NEURAL_SYNC: ACTIVE</div>
+						<span className="hud-label">Network Load</span>
+						<div className="hud-value">{networkLoad}%</div>
+						<div style={{
+							height: "2px",
+							background: "var(--copper-dark)",
+							width: "100%",
+							position: "relative"
+						}}>
+							<div style={{
+								height: "100%",
+								background: "var(--copper-primary)",
+								width: `${networkLoad}%`
+							}}></div>
+						</div>
+						<br />
+						<span className="hud-label">Latent Space</span>
+						<div className="hud-value">OPTIMIZED</div>
+					</div>
+
+					{/* Main Content */}
+					<div className="title-container">
+						<h1 className="mission-title">DEPLOYX</h1>
+						<div className="mission-info">
+							<div>MISSION TYPE: <span className="highlight">ML & MLOps Bootcamp + Hackathon</span></div>
+							<div>MISSION DATE: <span className="highlight">6–7 February 2026</span></div>
+						</div>
+					</div>
+
+					<button className="cta-button">START MISSION</button>
+
+					{/* Right HUD */}
+					<div className="hud-panel panel-right">
+						<span className="hud-label">Location Data</span>
+						<div className="hud-value">VECTOR COORDINATES: 28.6° / 77.2°</div>
+						<span className="hud-label">Encryption</span>
+						<div className="hud-value">SHA-256 COPPER_KEY</div>
+						<span className="hud-label">Objectives</span>
+						<div className="hud-value" style={{ fontSize: "0.75rem" }}>
+							1. TRAIN_MODELS<br />
+							2. ORCHESTRATE_PIPELINES<br />
+							3. DEPLOY_PRODUCTION
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default function HomeGradient() {
-	const containerRef = useRef(null);
-	const statsRefs = useRef([]);
-	const [hasAnimated, setHasAnimated] = useState(false);
-	const timelin = gsap.timeline();
+	const cardGridRef = useRef(null);
+	const cardsRef = useRef([]);
+	const sceneRef = useRef(null);
 
 	const statsData = [
-		{
-			number: 50,
-			suffix: "+",
-			label: "Events",
-			icon: "🎯",
-			color: "#64ffda",
-		},
-		{
-			number: 12,
-			suffix: "+",
-			label: "Hackathon Hosted",
-			icon: "💻",
-			color: "#ff6b9d",
-		},
-		{
-			number: 60,
-			suffix: "+",
-			label: "Alumni Members",
-			icon: "👥",
-			color: "#c77dff",
-		},
-		{
-			number: 10,
-			suffix: "+",
-			label: "Tie up Companies",
-			icon: "🤝",
-			color: "#ffd93d",
-		},
+		{ number: 50, label: "Events Managed", accentColor: "#9d00ff" },
+		{ number: 12, label: "Hackathons Hosted", accentColor: "#ff00c8" },
+		{ number: 60, label: "Alumni Members", accentColor: "#ff6b00" },
+		{ number: 10, label: "Tie-up Companies", accentColor: "#00f2ff" },
 	];
 
 	useEffect(() => {
-		const container = containerRef.current;
-		const statElements = statsRefs.current;
+		const isTouch = "ontouchstart" in window;
 
-		// Initial setup - hide elements
-		gsap.set(statElements, {
-			opacity: 0,
-			y: 50,
-			scale: 0.8,
-		});
+		if (!isTouch && cardsRef.current.length > 0) {
+			cardsRef.current.forEach((card) => {
+				const handleMouseMove = (e) => {
+					const rect = card.getBoundingClientRect();
+					const x = e.clientX - rect.left;
+					const y = e.clientY - rect.top;
 
-		// Create intersection observer for scroll trigger
+					card.style.setProperty("--mouse-x", `${x}px`);
+					card.style.setProperty("--mouse-y", `${y}px`);
+
+					const centerX = rect.width / 2;
+					const centerY = rect.height / 2;
+					const rotateX = (y - centerY) / 10;
+					const rotateY = (centerX - x) / 10;
+
+					card.style.transform = `
+						perspective(1000px)
+						rotateX(${rotateX}deg)
+						rotateY(${rotateY}deg)
+						translateZ(60px)
+						scale(1.05)
+					`;
+				};
+
+				const handleMouseLeave = () => {
+					card.style.transform = `
+						perspective(1000px)
+						rotateX(0deg)
+						rotateY(0deg)
+						translateZ(0px)
+						scale(1)
+					`;
+				};
+
+				card.addEventListener("mousemove", handleMouseMove);
+				card.addEventListener("mouseleave", handleMouseLeave);
+
+				return () => {
+					card.removeEventListener("mousemove", handleMouseMove);
+					card.removeEventListener("mouseleave", handleMouseLeave);
+				};
+			});
+
+			const handleDocumentMouseMove = (e) => {
+				if (cardGridRef.current) {
+					const moveX = (window.innerWidth / 2 - e.pageX) / 50;
+					const moveY = (window.innerHeight / 2 - e.pageY) / 50;
+					cardGridRef.current.style.transform = `rotateY(${
+						-15 + moveX
+					}deg) rotateX(${10 + moveY}deg)`;
+				}
+			};
+
+			document.addEventListener("mousemove", handleDocumentMouseMove);
+
+			return () => {
+				document.removeEventListener("mousemove", handleDocumentMouseMove);
+			};
+		} else if (isTouch) {
+			// Mobile touch interactions
+			cardsRef.current.forEach((card) => {
+				const handleTouchStart = () => {
+					card.style.transform = "scale(0.95) translateZ(0)";
+					card.style.background = "rgba(255, 255, 255, 0.15)";
+				};
+
+				const handleTouchEnd = () => {
+					card.style.transform = "scale(1) translateZ(0)";
+					card.style.background = "var(--glass-white)";
+				};
+
+				card.addEventListener("touchstart", handleTouchStart);
+				card.addEventListener("touchend", handleTouchEnd);
+
+				return () => {
+					card.removeEventListener("touchstart", handleTouchStart);
+					card.removeEventListener("touchend", handleTouchEnd);
+				};
+			});
+		}
+
+		// Visibility observer for animations
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting && !hasAnimated) {
-						animateStats();
-						setHasAnimated(true);
+					if (entry.isIntersecting) {
+						entry.target.style.animationPlayState = "running";
+					} else {
+						entry.target.style.animationPlayState = "paused";
 					}
 				});
 			},
-			{ threshold: 0.3 }
+			{ threshold: 0.1 }
 		);
 
-		if (container) {
-			observer.observe(container);
-		}
-
-		const animateStats = () => {
-			// Animate container appearance
-			gsap.to(statElements, {
-				opacity: 1,
-				y: 0,
-				scale: 1,
-				duration: 0.8,
-				stagger: 0.2,
-				ease: "power3.out",
-			});
-
-			// Animate numbers
-			statElements.forEach((element, index) => {
-				const numberElement = element.querySelector(".stat-number");
-				const targetNumber = statsData[index].number;
-
-				// Create counter object
-				const counter = { value: 0 };
-
-				gsap.to(counter, {
-					value: targetNumber,
-					duration: 2,
-					delay: 0.5 + index * 0.2,
-					ease: "power2.out",
-					onUpdate: () => {
-						numberElement.textContent = Math.floor(counter.value);
-					},
-					onComplete: () => {
-						numberElement.textContent = targetNumber;
-					},
-				});
-			});
-		};
+		document
+			.querySelectorAll(".membrane-blob")
+			.forEach((blob) => observer.observe(blob));
 
 		return () => {
-			if (container) {
-				observer.unobserve(container);
-			}
+			document
+				.querySelectorAll(".membrane-blob")
+				.forEach((blob) => observer.unobserve(blob));
 		};
-	}, [hasAnimated, statsData]);
-
-	useGSAP(() => {
-		timelin
-			.fromTo(
-				".GradientContainer",
-				{
-					opacity: 0,
-				},
-				{
-					opacity: 1,
-					scrollTrigger: {
-						trigger: ".GradientContainer",
-						start: "top bottom",
-						end: "top top",
-						scrub: 1,
-					},
-				}
-			)
-			.fromTo(
-				".lead-text",
-				{
-					opacity: 0,
-					left: "-1000px",
-				},
-				{
-					opacity: 0.85,
-					left: "2px",
-					ease: "power2.out",
-					scrollTrigger: {
-						trigger: ".GradientContainer",
-						start: "top center",
-						end: "top top",
-						scrub: 1,
-					},
-				}
-			)
-			.fromTo(
-				".clubtext",
-				{
-					yPercent: 100,
-					opacity: 0,
-				},
-				{
-					yPercent: 0,
-					opacity: 1,
-					ease: "power2.out",
-					duration: 1,
-					scrollTrigger: {
-						trigger: ".GradientContainer",
-						start: "top top",
-						end: "+=80px",
-						scrub: 1,
-					},
-				}
-			)
-			.fromTo(
-				".imp-image-area",
-				{
-					scale: 0.3,
-					opacity: 0,
-				},
-				{
-					scale: 1,
-					opacity: 1,
-					ease: "power2.out",
-					scrollTrigger: {
-						trigger: ".data-details",
-						start: "center top",
-						end: "bottom bottoms",
-						scrub: 1,
-					},
-				}
-			)
-			.fromTo(
-				".imp-data-area",
-				{
-					yPercent: 100,
-					opacity: 0,
-				},
-				{
-					yPercent: 0,
-					opacity: 1,
-					ease: "power2.out",
-					scrollTrigger: {
-						trigger: ".data-details",
-						start: "center top",
-						end: "bottom bottoms",
-						scrub: 1,
-					},
-				}
-			);
-	});
-
-	const handleStatHover = (index, isHovering) => {
-		const element = statsRefs.current[index];
-
-		gsap.to(element, {
-			scale: isHovering ? 1.05 : 1,
-			rotationY: isHovering ? 5 : 0,
-			duration: 0.3,
-			ease: "power2.out",
-		});
-
-		// Animate the icon
-		const icon = element.querySelector(".stat-icon");
-		gsap.to(icon, {
-			scale: isHovering ? 1.2 : 1,
-			rotation: isHovering ? 10 : 0,
-			duration: 0.3,
-			ease: "power2.out",
-		});
-	};
+	}, []);
 
 	return (
-		<div className="GradientContainer">
-			<div className="data-details">
-				<div className="csedFullForm">
-					<div className="logoLetter">
-						C<span className="lead-text">enter for</span>
-					</div>
-					<div className="logoLetter">
-						S<span className="lead-text">kills &</span>
-					</div>
-					<div className="logoLetter">
-						E<span className="lead-text">ntrepreneurship</span>
-					</div>
-					<div className="logoLetter">
-						D<span className="lead-text">evelopment</span>
-					</div>
-					<div className="clubtext">
-						Community that exists to make a meaningful impact in the
-						lives of young learners who have that fire to grow,
-						build, and innovate.
-					</div>
+		<>
+			<section className="flux-section">
+				<div className="ambient-membrane">
+					<div className="membrane-blob blob-1"></div>
+					<div className="membrane-blob blob-2"></div>
 				</div>
-				<div className="stats-section">
-					<div className="stats-container" ref={containerRef}>
-						<div className="stats-grid">
+
+				<div className="main-grid">
+					<div className="content-block">
+						<h1 className="title-reveal">
+							Center for <br />
+							<span style={{ color: "var(--accent-purple)" }}>
+								Skills
+							</span>{" "}
+							& <br />
+							Entrepreneurship
+						</h1>
+						<p className="description">
+							Forging the next generation of digital architects. We
+							provide the ecosystem where student innovators
+							transition from dreaming to building
+							industry-disrupting ventures.
+						</p>
+					</div>
+
+					<div className="scene-3d" ref={sceneRef}>
+						<div className="card-grid" ref={cardGridRef}>
 							{statsData.map((stat, index) => (
 								<div
 									key={index}
-									className="stat-card"
-									ref={(el) =>
-										(statsRefs.current[index] = el)
-									}
-									style={{ "--accent-color": stat.color }}
-									onMouseEnter={() =>
-										handleStatHover(index, true)
-									}
-									onMouseLeave={() =>
-										handleStatHover(index, false)
-									}
+									className="flux-card"
+									ref={(el) => (cardsRef.current[index] = el)}
+									style={{
+										"--accent-color": stat.accentColor,
+									}}
 								>
-									<div className="stat-icon">{stat.icon}</div>
-									<div className="stat-content">
-										<div className="stat-number-container">
-											<span className="stat-number">
-												0
-											</span>
-											<span className="stat-suffix">
-												{stat.suffix}
-											</span>
-										</div>
-										<div className="stat-label">
-											{stat.label}
-										</div>
-									</div>
-									<div className="stat-glow"></div>
+									<span className="card-val">
+										{stat.number}+
+									</span>
+									<span className="card-label">
+										{stat.label}
+									</span>
+									<div className="glow-edge"></div>
 								</div>
 							))}
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className="imp-people-intro">
-				<div className="imp-image-area"></div>
-				<div className="imp-data-area">
-					<h1 className="imp-title">Prof. Anoop Kumar Gupta</h1>
-					<h3 className="imp-sub-title">
-						Vice Chancellor & Director Institute of Applied Sciences
-						& Humanities Department of English
-					</h3>
-					<h3 className="imp-sub-title">Chief Patron of CSED Club</h3>
-					<span className="imp-desc">
-						<p>
-							Prof. Anup Kumar Gupta serves as the Vice Chancellor
-							and Director of the Institute of Applied Sciences &
-							Humanities at our college. With over 28 years of
-							academic and administrative experience, he plays a
-							key role in fostering academic excellence and
-							institutional growth.
-						</p>
-						<p>
-							A Gold Medalist in M.A. (English), Prof. Gupta holds
-							a Ph.D., M.Phil., MBA, and Executive MBA (Overall
-							Topper). His leadership and scholarly contributions
-							have significantly enriched the Department of
-							English and continue to guide both faculty and
-							students toward higher standards of learning and
-							research.
-						</p>
-					</span>
-				</div>
-			</div>
-		</div>
+			</section>
+
+			<DeployXMission />
+		</>
 	);
 }
