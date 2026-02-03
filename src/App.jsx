@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import GlassNav from "./components/GlassNav";
+import LiquidNav from "./components/LiquidNav";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
 import Projects from "./pages/Projects";
@@ -23,7 +23,7 @@ function App() {
 			<div id="reload-fade" className="hide" style={{ opacity: 0, pointerEvents: "none" }}></div>
 			<Router>
 				<ScrollToTop />
-				<GlassNav />
+				<LiquidNav />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/team" element={<Team />} />

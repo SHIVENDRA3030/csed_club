@@ -1,0 +1,275 @@
+/* Liquid Nav CSS Variables */
+:root {
+    --cyan-primary: #14b8a6;
+    --cyan-glow: rgba(20, 184, 166, 0.4);
+    --obsidian: #0a0a0a;
+    --glass-bg: rgba(10, 10, 10, 0.65);
+    --surface-tension: cubic-bezier(0.23, 1, 0.32, 1);
+    --mx: 50%;
+    --my: 50%;
+}
+
+/* Wrapper */
+.liquid-nav-wrapper {
+    position: fixed;
+    top: 24px;
+    left: 0;
+    width: 100%;
+    padding: 0 64px;
+    z-index: 1000;
+    transition: transform 0.4s var(--surface-tension);
+}
+
+.parallax-container {
+    perspective: 1000px;
+}
+
+/* Main Container */
+.liquid-nav-container {
+    position: relative;
+    height: 72px;
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    overflow: hidden;
+
+    /* High-fidelity borders */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(20, 184, 166, 0.3);
+
+    /* Depth effects */
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.05),
+        inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.4s var(--surface-tension);
+    will-change: transform;
+}
+
+/* Specular Caustic Highlight Layer */
+.liquid-nav-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx) var(--my),
+            rgba(20, 184, 166, 0.15) 0%,
+            transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Logo */
+.liquid-nav-container .logo {
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: -1px;
+    color: #ffffff;
+    text-decoration: none;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.liquid-nav-container .logo svg {
+    flex-shrink: 0;
+}
+
+/* Nav Links */
+.liquid-nav-container .nav-links {
+    display: flex;
+    gap: 48px;
+    list-style: none;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+}
+
+.liquid-nav-container .nav-item {
+    position: relative;
+}
+
+.liquid-nav-container .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 8px 0;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    position: relative;
+    display: block;
+    font-family: 'Inter', sans-serif;
+}
+
+.liquid-nav-container .nav-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 15px var(--cyan-glow);
+}
+
+/* Morphing Liquid Underline */
+.liquid-nav-container .underline {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--cyan-primary);
+    border-radius: 4px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--surface-tension);
+    box-shadow: 0 0 10px var(--cyan-primary);
+}
+
+.liquid-nav-container .nav-link:hover .underline {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Active State */
+.liquid-nav-container .nav-link.active {
+    color: #ffffff;
+}
+
+.liquid-nav-container .nav-link.active .underline {
+    transform: scaleX(1);
+    height: 3px;
+    filter: blur(0.5px);
+}
+
+/* Hamburger */
+.liquid-nav-container .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    padding: 0;
+}
+
+.liquid-nav-container .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    margin: 6px 0;
+    transition: 0.4s var(--surface-tension);
+    border-radius: 2px;
+}
+
+.liquid-nav-container .hamburger.open span:first-child {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.liquid-nav-container .hamburger.open span:last-child {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    clip-path: circle(0% at calc(100% - 80px) 60px);
+    transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 999;
+}
+
+.mobile-overlay.open {
+    clip-path: circle(150% at calc(100% - 80px) 60px);
+}
+
+.mobile-overlay .mobile-link {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.mobile-overlay.open .mobile-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .liquid-nav-wrapper {
+        padding: 0 24px;
+        top: 16px;
+    }
+
+    .liquid-nav-container .nav-links {
+        display: none;
+    }
+
+    .liquid-nav-container .hamburger {
+        display: block;
+    }
+
+    .liquid-nav-container {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .liquid-nav-wrapper {
+        padding: 0 16px;
+        top: 12px;
+    }
+
+    .liquid-nav-container {
+        height: 60px;
+        padding: 0 16px;
+        border-radius: 12px;
+    }
+
+    .liquid-nav-container .logo {
+        font-size: 20px;
+    }
+
+    .liquid-nav-container .logo svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .mobile-overlay .mobile-link {
+        font-size: 24px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .liquid-nav-container,
+    .liquid-nav-container .underline,
+    .mobile-overlay,
+    .mobile-overlay .mobile-link,
+    .liquid-nav-wrapper {
+        transition: none !important;
+    }
+}
