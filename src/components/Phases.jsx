@@ -114,16 +114,21 @@ export default function Phases(props) {
 			observer.observe(revealContainerRef.current);
 		}
 
-		// Parallax interaction
+
+		// Parallax interaction optimized with requestAnimationFrame
 		const handleMouseMove = (e) => {
 			if (window.innerWidth < 768 || !headlineRef.current) return;
-			const x =
-				((e.clientX / window.innerWidth - 0.5) * 20);
-			const y =
-				((e.clientY / window.innerHeight - 0.5) * 20);
-			headlineRef.current.style.transform = `rotateX(${
-				10 - y
-			}deg) rotateY(${x}deg)`;
+
+			if (!animationFrameRef.current) {
+				animationFrameRef.current = requestAnimationFrame(() => {
+					const x = ((e.clientX / window.innerWidth - 0.5) * 20);
+					const y = ((e.clientY / window.innerHeight - 0.5) * 20);
+					if (headlineRef.current) {
+						headlineRef.current.style.transform = `rotateX(${10 - y}deg) rotateY(${x}deg)`;
+					}
+					animationFrameRef.current = null;
+				});
+			}
 		};
 
 		document.addEventListener("mousemove", handleMouseMove);
@@ -147,8 +152,8 @@ export default function Phases(props) {
 	// Split content into lines for reveal effect
 	const contentLines = props.content
 		? props.content
-				.split("\n")
-				.filter((line) => line.trim().length > 0)
+			.split("\n")
+			.filter((line) => line.trim().length > 0)
 		: [];
 
 	return (
