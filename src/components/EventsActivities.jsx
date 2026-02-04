@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,7 +6,7 @@ import "./EventsActivities.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function EventsActivities() {
+const EventsActivities = memo(function EventsActivities() {
 	const canvasRef = useRef(null);
 	const containerRef = useRef(null);
 
@@ -84,15 +84,20 @@ export default function EventsActivities() {
 			group.add(wire);
 		}
 
-		// Particle System
-		const particlesCount = 40;
+		// Particle System - Reduced count for better performance
+		const particlesCount = 20;
 		const posArray = new Float32Array(particlesCount * 3);
 		for (let i = 0; i < particlesCount * 3; i++) {
 			posArray[i] = (Math.random() - 0.5) * 15;
 		}
 		const particlesGeo = new THREE.BufferGeometry();
 		particlesGeo.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
-		const particlesMat = new THREE.PointsMaterial({ size: 0.03, color: 0x00d4ff });
+		const particlesMat = new THREE.PointsMaterial({ 
+			size: 0.03, 
+			color: 0x00d4ff,
+			transparent: true,
+			opacity: 0.8
+		});
 		const particleMesh = new THREE.Points(particlesGeo, particlesMat);
 		scene.add(particleMesh);
 
@@ -132,7 +137,9 @@ export default function EventsActivities() {
 			particleMesh.rotation.y -= 0.0005;
 
 			renderer.render(scene, camera);
-			requestAnimationFrame(animate);
+			
+			// Use setTimeout for better performance control
+			setTimeout(() => requestAnimationFrame(animate), 16); // ~60fps
 		}
 		animate();
 
@@ -140,18 +147,28 @@ export default function EventsActivities() {
 		return () => {
 			window.removeEventListener("resize", resize);
 			renderer.dispose();
+			shapes.forEach(s => {
+				if (s.mesh && s.mesh.geometry) s.mesh.geometry.dispose();
+				if (s.wire && s.wire.geometry) s.wire.geometry.dispose();
+			});
+			if (particleMesh && particleMesh.geometry) particleMesh.geometry.dispose();
+			if (particlesMat) particlesMat.dispose();
+			if (crystalMat) crystalMat.dispose();
+			if (wireMat) wireMat.dispose();
 		};
 	}, []);
 
 	useEffect(() => {
-		// GSAP SCROLL ANIMATIONS
+		// GSAP SCROLL ANIMATIONS - Optimized for performance
 	const timeline = gsap.timeline({
 		scrollTrigger: {
 			trigger: containerRef.current,
 			start: "top 80%",
 			end: "bottom 60%",
-			scrub: 1.5,
+			scrub: 1,
 			markers: false,
+			fastScrollEnd: true,
+			preventOverlaps: true,
 		},
 	});
 
@@ -234,6 +251,7 @@ export default function EventsActivities() {
 
 		return () => {
 			timeline.kill();
+			ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 		};
 	}, []);
 
@@ -265,4 +283,6 @@ export default function EventsActivities() {
 			</div>
 		</div>
 	);
-}
+});
+
+export default EventsActivities;
