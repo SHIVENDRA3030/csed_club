@@ -1,5 +1,5 @@
-import React from "react";
-import NeuronAnimation from "../components/NeuronAnimation";
+import React, { Suspense, lazy } from "react";
+const NeuronAnimation = lazy(() => import("../components/NeuronAnimation"));
 import FloatingText from "../components/FloatingText";
 import EventsActivities from "../components/EventsActivities";
 import HomeGradient from "../components/HomeGradient";
@@ -29,7 +29,9 @@ export default function Home() {
 
 	return (
 		<>
-			<NeuronAnimation />
+			<Suspense fallback={<div style={{ height: "100vh" }}></div>}>
+				<NeuronAnimation />
+			</Suspense>
 			<HomeGradient />
 			<Phases
 				heading="About CSED?"
