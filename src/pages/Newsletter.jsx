@@ -4,13 +4,11 @@ import GlobalBackgorund from "../components/Team/GlobalBackground";
 export default function Newsletter() {
 	return (
 		<div>
-			<img
-				src="/images/content/newsletter-background.png"
+			<div
 				style={{
 					height: "100vh",
 					width: "100vw",
-					backgroundSize: "cover",
-					backgroundRepeat: "no-repeat",
+					background: "linear-gradient(135deg, rgba(157, 0, 255, 0.15) 0%, rgba(255, 0, 200, 0.1) 100%)",
 					opacity: 0.2,
 				}}
 			/>

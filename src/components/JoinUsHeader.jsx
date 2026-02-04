@@ -8,7 +8,7 @@ export default function JoinUsHeader({ onTeamClick }) {
 				className="teamCell"
 				onClick={() => onTeamClick("Tech Cell")}
 				style={{
-					background: `url("/images/team/Tech.jpg")`,
+					background: `linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)`,
 					backgroundSize: "cover",
 				}}
 			></div>
@@ -16,7 +16,7 @@ export default function JoinUsHeader({ onTeamClick }) {
 				className="teamCell"
 				onClick={() => onTeamClick("Operations & Relations")}
 				style={{
-					background: `url("/images/team/operations.jpg")`,
+					background: `linear-gradient(135deg, #059669 0%, #10b981 100%)`,
 					backgroundSize: "cover",
 				}}
 			></div>
@@ -24,7 +24,7 @@ export default function JoinUsHeader({ onTeamClick }) {
 				className="teamCell"
 				onClick={() => onTeamClick("Media Cell")}
 				style={{
-					background: `url("/images/team/Media.jpg")`,
+					background: `linear-gradient(135deg, #dc2626 0%, #f59e0b 100%)`,
 					backgroundSize: "cover",
 				}}
 			></div>

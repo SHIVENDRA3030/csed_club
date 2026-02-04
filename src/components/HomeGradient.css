@@ -26,16 +26,12 @@
 	padding: 4rem 8%;
 	overflow: hidden;
 	background: var(--bg-deep);
-	background: radial-gradient(
-			circle at 20% 30%,
+	background: radial-gradient(circle at 20% 30%,
 			rgba(157, 0, 255, 0.15) 0%,
-			transparent 40%
-		),
-		radial-gradient(
-			circle at 80% 70%,
+			transparent 40%),
+		radial-gradient(circle at 80% 70%,
 			rgba(255, 0, 200, 0.1) 0%,
-			transparent 40%
-		);
+			transparent 40%);
 }
 
 /* Ambient Flux Background */
@@ -76,6 +72,7 @@
 	from {
 		transform: translate(0, 0) scale(1);
 	}
+
 	to {
 		transform: translate(100px, 50px) scale(1.2);
 	}
@@ -167,11 +164,9 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: radial-gradient(
-		800px circle at var(--mouse-x) var(--mouse-y),
-		rgba(255, 255, 255, 0.1),
-		transparent 40%
-	);
+	background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+			rgba(255, 255, 255, 0.1),
+			transparent 40%);
 	opacity: 0;
 	transition: opacity 0.5s;
 }
@@ -274,7 +269,7 @@
 	min-width: 400px;
 	height: 400px;
 	border-radius: 20px;
-	background: url("/images/People/Anoop.jpg");
+	background: linear-gradient(135deg, rgba(157, 0, 255, 0.3) 0%, rgba(255, 0, 200, 0.2) 100%);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -574,6 +569,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
 	.membrane-blob,
 	.flux-card,
 	.scene-3d {
@@ -615,6 +611,7 @@
 	0% {
 		background-position: 0 0;
 	}
+
 	100% {
 		background-position: 1000px 1000px;
 	}
@@ -638,6 +635,7 @@
 		transform: scale(1.2) translateZ(-500px);
 		opacity: 0;
 	}
+
 	to {
 		transform: scale(1) translateZ(0);
 		opacity: 1;
@@ -750,6 +748,7 @@ h1.mission-title::after {
 	0% {
 		top: -10%;
 	}
+
 	100% {
 		top: 110%;
 	}
