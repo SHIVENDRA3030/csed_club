@@ -23,22 +23,15 @@ function App() {
 	useEffect(() => {
 		// Initialize Lenis smooth scrolling with optimized settings
 		const lenis = new Lenis({
-			lerp: 0.08, // Lower = smoother, higher = more responsive (0.05-0.1 recommended)
+			lerp: 0.1, // Lower = smoother, higher = more responsive (0.05-0.15 recommended)
 			smoothWheel: true,
-			wheelMultiplier: 0.8,
-			touchMultiplier: 1.5,
+			wheelMultiplier: 1,
+			touchMultiplier: 2,
 			infinite: false,
-			syncTouch: true,
 		});
 
-		// Connect Lenis to GSAP ScrollTrigger with throttling
-		let scrollTimeout;
-		lenis.on("scroll", (e) => {
-			clearTimeout(scrollTimeout);
-			scrollTimeout = setTimeout(() => {
-				ScrollTrigger.update();
-			}, 16); // ~60fps throttling
-		});
+		// Connect Lenis to GSAP ScrollTrigger
+		lenis.on("scroll", ScrollTrigger.update);
 
 		// Use native requestAnimationFrame for better performance
 		function raf(time) {
@@ -54,7 +47,6 @@ function App() {
 
 		return () => {
 			lenis.destroy();
-			clearTimeout(scrollTimeout);
 		};
 	}, []);
 

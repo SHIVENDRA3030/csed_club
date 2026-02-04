@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, memo, useCallback } from "react";
+import React, { Suspense, lazy } from "react";
 const NeuronAnimation = lazy(() => import("../components/NeuronAnimation"));
 import FloatingText from "../components/FloatingText";
 import EventsActivities from "../components/EventsActivities";
@@ -8,7 +8,7 @@ import LightPipeButton from "../components/LightPipeButton";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const Home = memo(function Home() {
+export default function Home() {
 	useGSAP(() => {
 		gsap.fromTo(
 			".apply-now-container",
@@ -71,6 +71,4 @@ const Home = memo(function Home() {
 			</div>
 		</>
 	);
-});
-
-export default Home;
+}

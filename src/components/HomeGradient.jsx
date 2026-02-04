@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { useRef, useState, useEffect } from "react";
 import "./HomeGradient.css";
 
@@ -7,14 +7,7 @@ const DeployXMission = () => {
 	const [networkLoad, setNetworkLoad] = useState(84.2);
 
 	useEffect(() => {
-		let mouseTimeout;
-		let lastMouseMove = 0;
-		
 		const handleMouseMove = (e) => {
-			const now = Date.now();
-			if (now - lastMouseMove < 16) return; // Throttle to ~60fps
-			lastMouseMove = now;
-			
 			if (!consoleRef.current) return;
 			const x = (window.innerWidth / 2 - e.clientX) / 25;
 			const y = (window.innerHeight / 2 - e.clientY) / 25;
@@ -22,20 +15,17 @@ const DeployXMission = () => {
 		};
 
 		const handleScroll = () => {
-			clearTimeout(mouseTimeout);
-			mouseTimeout = setTimeout(() => {
-				const scrolled = window.pageYOffset;
-				const topoBackground = document.querySelector(".topo-background");
-				if (topoBackground) {
-					topoBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-				}
-			}, 16);
+			const scrolled = window.pageYOffset;
+			const topoBackground = document.querySelector(".topo-background");
+			if (topoBackground) {
+				topoBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+			}
 		};
 
-		// Update network load periodically - reduced frequency
+		// Update network load periodically
 		const hudInterval = setInterval(() => {
 			setNetworkLoad((80 + Math.random() * 5).toFixed(1));
-		}, 3000);
+		}, 2000);
 
 		document.addEventListener("mousemove", handleMouseMove);
 		window.addEventListener("scroll", handleScroll);
@@ -44,7 +34,6 @@ const DeployXMission = () => {
 			document.removeEventListener("mousemove", handleMouseMove);
 			window.removeEventListener("scroll", handleScroll);
 			clearInterval(hudInterval);
-			clearTimeout(mouseTimeout);
 		};
 	}, []);
 
@@ -118,7 +107,7 @@ const DeployXMission = () => {
 	);
 };
 
-const HomeGradient = memo(function HomeGradient() {
+export default function HomeGradient() {
 	const cardGridRef = useRef(null);
 	const cardsRef = useRef([]);
 	const sceneRef = useRef(null);
@@ -135,41 +124,29 @@ const HomeGradient = memo(function HomeGradient() {
 
 		if (!isTouch && cardsRef.current.length > 0) {
 			cardsRef.current.forEach((card) => {
-				let animationFrame;
-				let lastMouseMove = 0;
-				
 				const handleMouseMove = (e) => {
-					const now = Date.now();
-					if (now - lastMouseMove < 16) return; // Throttle to ~60fps
-					lastMouseMove = now;
-					
-					if (animationFrame) cancelAnimationFrame(animationFrame);
-					
-					animationFrame = requestAnimationFrame(() => {
-						const rect = card.getBoundingClientRect();
-						const x = e.clientX - rect.left;
-						const y = e.clientY - rect.top;
+					const rect = card.getBoundingClientRect();
+					const x = e.clientX - rect.left;
+					const y = e.clientY - rect.top;
 
-						card.style.setProperty("--mouse-x", `${x}px`);
-						card.style.setProperty("--mouse-y", `${y}px`);
+					card.style.setProperty("--mouse-x", `${x}px`);
+					card.style.setProperty("--mouse-y", `${y}px`);
 
-						const centerX = rect.width / 2;
-						const centerY = rect.height / 2;
-						const rotateX = (y - centerY) / 10;
-						const rotateY = (centerX - x) / 10;
+					const centerX = rect.width / 2;
+					const centerY = rect.height / 2;
+					const rotateX = (y - centerY) / 10;
+					const rotateY = (centerX - x) / 10;
 
-						card.style.transform = `
-							perspective(1000px)
-							rotateX(${rotateX}deg)
-							rotateY(${rotateY}deg)
-							translateZ(60px)
-							scale(1.05)
-						`;
-					});
+					card.style.transform = `
+						perspective(1000px)
+						rotateX(${rotateX}deg)
+						rotateY(${rotateY}deg)
+						translateZ(60px)
+						scale(1.05)
+					`;
 				};
 
 				const handleMouseLeave = () => {
-					if (animationFrame) cancelAnimationFrame(animationFrame);
 					card.style.transform = `
 						perspective(1000px)
 						rotateX(0deg)
@@ -185,62 +162,124 @@ const HomeGradient = memo(function HomeGradient() {
 				return () => {
 					card.removeEventListener("mousemove", handleMouseMove);
 					card.removeEventListener("mouseleave", handleMouseLeave);
-					if (animationFrame) cancelAnimationFrame(animationFrame);
 				};
 			});
 
-			let documentAnimationFrame;
-			let lastDocumentMouseMove = 0;
-			
 			const handleDocumentMouseMove = (e) => {
-				const now = Date.now();
-				if (now - lastDocumentMouseMove < 16) return; // Throttle to ~60fps
-				lastDocumentMouseMove = now;
-				
-				if (documentAnimationFrame) cancelAnimationFrame(documentAnimationFrame);
-				
-				documentAnimationFrame = requestAnimationFrame(() => {
-					if (cardGridRef.current) {
-						const moveX = (window.innerWidth / 2 - e.pageX) / 50;
-						const moveY = (window.innerHeight / 2 - e.pageY) / 50;
-						cardGridRef.current.style.transform = `rotateY(${
-							-15 + moveX
-						}deg) rotateX(${10 + moveY}deg)`;
-					}
-				});
+				if (cardGridRef.current) {
+					const moveX = (window.innerWidth / 2 - e.pageX) / 50;
+					const moveY = (window.innerHeight / 2 - e.pageY) / 50;
+					cardGridRef.current.style.transform = `rotateY(${
+						-15 + moveX
+					}deg) rotateX(${10 + moveY}deg)`;
+				}
 			};
 
 			document.addEventListener("mousemove", handleDocumentMouseMove);
 
 			return () => {
 				document.removeEventListener("mousemove", handleDocumentMouseMove);
-				if (documentAnimationFrame) cancelAnimationFrame(documentAnimationFrame);
 			};
+		} else if (isTouch) {
+			// Mobile touch interactions
+			cardsRef.current.forEach((card) => {
+				const handleTouchStart = () => {
+					card.style.transform = "scale(0.95) translateZ(0)";
+					card.style.background = "rgba(255, 255, 255, 0.15)";
+				};
+
+				const handleTouchEnd = () => {
+					card.style.transform = "scale(1) translateZ(0)";
+					card.style.background = "var(--glass-white)";
+				};
+
+				card.addEventListener("touchstart", handleTouchStart);
+				card.addEventListener("touchend", handleTouchEnd);
+
+				return () => {
+					card.removeEventListener("touchstart", handleTouchStart);
+					card.removeEventListener("touchend", handleTouchEnd);
+				};
+			});
 		}
+
+		// Visibility observer for animations
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.style.animationPlayState = "running";
+					} else {
+						entry.target.style.animationPlayState = "paused";
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+
+		document
+			.querySelectorAll(".membrane-blob")
+			.forEach((blob) => observer.observe(blob));
+
+		return () => {
+			document
+				.querySelectorAll(".membrane-blob")
+				.forEach((blob) => observer.unobserve(blob));
+		};
 	}, []);
 
 	return (
-		<div className="flux-container">
-			<DeployXMission />
-			<div className="flux-scene" ref={sceneRef}>
-				<div className="flux-card-grid" ref={cardGridRef}>
-					{statsData.map((stat, index) => (
-						<div
-							key={index}
-							className="flux-card"
-							ref={(el) => (cardsRef.current[index] = el)}
-							style={{ "--accent-color": stat.accentColor }}
-						>
-							<div className="flux-card-content">
-								<div className="flux-card-number">{stat.number}</div>
-								<div className="flux-card-label">{stat.label}</div>
-							</div>
-						</div>
-					))}
+		<>
+			<section className="flux-section">
+				<div className="ambient-membrane">
+					<div className="membrane-blob blob-1"></div>
+					<div className="membrane-blob blob-2"></div>
 				</div>
-			</div>
-		</div>
-	);
-});
 
-export default HomeGradient;
+				<div className="main-grid">
+					<div className="content-block">
+						<h1 className="title-reveal">
+							Center for <br />
+							<span style={{ color: "var(--accent-purple)" }}>
+								Skills
+							</span>{" "}
+							& <br />
+							Entrepreneurship
+						</h1>
+						<p className="description">
+							Forging the next generation of digital architects. We
+							provide the ecosystem where student innovators
+							transition from dreaming to building
+							industry-disrupting ventures.
+						</p>
+					</div>
+
+					<div className="scene-3d" ref={sceneRef}>
+						<div className="card-grid" ref={cardGridRef}>
+							{statsData.map((stat, index) => (
+								<div
+									key={index}
+									className="flux-card"
+									ref={(el) => (cardsRef.current[index] = el)}
+									style={{
+										"--accent-color": stat.accentColor,
+									}}
+								>
+									<span className="card-val">
+										{stat.number}+
+									</span>
+									<span className="card-label">
+										{stat.label}
+									</span>
+									<div className="glow-edge"></div>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<DeployXMission />
+		</>
+	);
+}
