@@ -8,8 +8,8 @@
 }
 
 .glass-nav {
-	--bg-color: rgba(255, 255, 255, 0.25);
-	--highlight: rgba(255, 255, 255, 0.75);
+	--bg-color: rgba(5, 2, 8, 0.6);
+	--highlight: rgba(157, 0, 255, 0.3);
 	--text: #ffffff;
 
 	position: fixed;
@@ -101,10 +101,10 @@
 }
 
 .nav-item:hover {
-	background-color: rgba(255, 255, 255, 0.1);
-	box-shadow: 3px 3px 20px #4286f41e;
+	background-color: rgba(157, 0, 255, 0.15);
+	box-shadow: 3px 3px 20px rgba(157, 0, 255, 0.3);
 	scale: 1.2;
-	color: rgba(0, 0, 255, 0.851);
+	color: #ff00c8;
 	font-size: 16px;
 	font-weight: 600;
 }

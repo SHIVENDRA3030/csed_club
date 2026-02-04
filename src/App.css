@@ -30,7 +30,7 @@ nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: #ffffffb3;
+	background: rgba(5, 2, 8, 0.8);
 	backdrop-filter: blur(10px);
 	z-index: 1000;
 	box-shadow: inset 0px 0px 15px 5px transparent;
@@ -38,8 +38,8 @@ nav {
 .footer {
 	height: 35vh;
 	width: 100%;
-	background-color: #ffffff;
-	color: #000000;
+	background-color: #050208;
+	color: #ffffff;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-template-rows: repeat(5, 1fr);
@@ -76,7 +76,7 @@ nav {
 	}
 	.subscribe-to {
 		cursor: pointer;
-		background: #000000;
+		background: var(--accent-purple);
 		border: none;
 		text-align: end;
 		border-radius: 20px;
@@ -89,11 +89,13 @@ nav {
 			transform: rotate(-90deg);
 			font-weight: 1000;
 			transition: all 0.3s cubic-bezier(0.94, 0.7, 0, 0.52);
+			color: #ffffff;
 		}
 	}
 	.subscribe-to:hover {
 		border-radius: 20px;
 		width: 100%;
+		background: var(--accent-magenta);
 		i {
 			transform: rotate(0deg);
 		}
@@ -101,7 +103,7 @@ nav {
 
 	a {
 		text-decoration: none;
-		color: black;
+		color: #ffffff;
 		i {
 			font-size: 20px;
 			margin-right: 10px;
@@ -112,7 +114,7 @@ nav {
 	}
 	a:hover {
 		text-decoration: underline;
-		color: blue;
+		color: var(--accent-purple);
 	}
 }
 

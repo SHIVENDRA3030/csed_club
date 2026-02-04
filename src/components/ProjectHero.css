@@ -26,7 +26,7 @@
 }
 
 body {
-	background-color: black;
+	background-color: #050208;
 	color: white;
 	height: 100vh;
 	width: 100%;
@@ -34,7 +34,7 @@ body {
 
 .entry-bg {
 	height: 100%;
-	background-color: #232323;
+	background-color: #050208;
 }
 
 .project-hero-container {

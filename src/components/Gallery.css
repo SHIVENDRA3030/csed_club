@@ -2,7 +2,7 @@
 .component-container {
 	width: 100vw;
 	min-height: 100vh;
-	background: #000000;
+	background: #050208;
 	color: #fff;
 	position: relative;
 	display: flex;
@@ -37,11 +37,11 @@
 	position: sticky;
 	z-index: 2;
 	top: 70px;
-	background: #232323;
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18),
+	background: #1a1a24;
+	box-shadow: 0 8px 32px 0 rgba(157, 0, 255, 0.1),
 		0 1.5px 6px 0 rgba(0, 0, 0, 0.12);
 	border-radius: 18px;
-	border: 1.5px solid #232323;
+	border: 1.5px solid rgba(157, 0, 255, 0.2);
 	transition: background 0.3s, box-shadow 0.3s, border 0.3s;
 	cursor: pointer;
 	z-index: 2;

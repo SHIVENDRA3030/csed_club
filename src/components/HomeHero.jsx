@@ -1,15 +1,23 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import RandomVideo from "../content/6982946-uhd_2880_2160_25fps.mp4";
 import "./HomeHero.css";
 gsap.registerPlugin(ScrollTrigger);
+
+// Sample video source - using a CDN video
+const HERO_VIDEO_URL = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
 function HomeHero() {
 	const scrollRef = useRef();
 	const videoRef = useRef(null);
+	const [videoError, setVideoError] = useState(false);
 	const tl = gsap.timeline();
+
+	const handleVideoError = () => {
+		console.error("Hero video failed to load");
+		setVideoError(true);
+	};
 
 	useGSAP(() => {
 		gsap.to("#hero-video", {
@@ -65,15 +73,18 @@ function HomeHero() {
 	return (
 		<>
 			<div className="container" ref={scrollRef}>
-				<video
-					id="hero-video"
-					ref={videoRef}
-					src={RandomVideo}
-					autoPlay={true}
-					muted
-					loop
-					className="video"
-				/>
+				{!videoError && (
+					<video
+						id="hero-video"
+						ref={videoRef}
+						src={HERO_VIDEO_URL}
+						autoPlay={true}
+						muted
+						loop
+						className="video"
+						onError={handleVideoError}
+					/>
+				)}
 				<div className="content">
 					<h2 className="greet">Welcome to CSED CLUB GLAU</h2>
 					<h3>

@@ -1,5 +1,5 @@
 body {
-	background: #000;
+	background: #050208;
 	color: #f4f4f4;
 	font-family: "Inter", "Segoe UI", Arial, sans-serif;
 }
@@ -12,8 +12,8 @@ body {
 	justify-content: center;
 	align-items: center;
 	gap: 36px;
-	background: #000;
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	background: #050208;
+	box-shadow: 0 8px 32px 0 rgba(157, 0, 255, 0.2);
 	border-radius: 32px;
 	margin: 32px 0;
 	padding-bottom: 32px;
@@ -24,18 +24,18 @@ body {
 	font-weight: 900;
 	letter-spacing: 2px;
 	color: #fff;
-	background: #000;
+	background: #050208;
 	padding: 0 36px;
 	border-radius: 24px;
-	box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 4px 24px 0 rgba(157, 0, 255, 0.15);
 	margin-bottom: 0;
 	margin-top: 32px;
 	background: linear-gradient(
 		135deg,
-		#00c9a7 0%,
-		#845ec2 40%,
-		#f9d423 75%,
-		#ff4e50 100%
+		#9d00ff 0%,
+		#ff00c8 40%,
+		#ff6b00 75%,
+		#ff00c8 100%
 	);
 	background-clip: text;
 	color: transparent;
@@ -43,12 +43,12 @@ body {
 
 .team-short-desc {
 	width: 70%;
-	background: #000;
+	background: #050208;
 	font-size: 1.2rem;
 	padding: 24px;
 	border-radius: 22px;
 	color: #e0e0e0;
-	box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 2px 16px 0 rgba(157, 0, 255, 0.1);
 	margin-bottom: 12px;
 }
 
@@ -65,9 +65,9 @@ body {
 	display: flex;
 	align-items: center;
 	gap: 18px;
-	background: #000;
+	background: #050208;
 	border-radius: 24px;
-	box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.25);
+	box-shadow: 0 4px 32px 0 rgba(157, 0, 255, 0.15);
 	padding: 18px 28px;
 	font-size: 1.25rem;
 	font-weight: 600;
@@ -77,14 +77,14 @@ body {
 		box-shadow 0.18s cubic-bezier(0.4, 2, 0.6, 1), background 0.18s;
 	position: relative;
 	overflow: hidden;
-	border: 3px solid rgb(53, 41, 65);
+	border: 3px solid rgba(157, 0, 255, 0.3);
 }
 
 .department-name:hover,
 .department-name:focus {
 	transform: scale(1.045);
-	background: #111; /* Slightly lighter black for hover, or keep #000 for pure black */
-	box-shadow: 0 8px 32px 0 #6c63ff55, 0 2px 16px 0 #23294655;
+	background: #0a0410;
+	box-shadow: 0 8px 32px 0 rgba(255, 0, 200, 0.3), 0 2px 16px 0 rgba(157, 0, 255, 0.2);
 }
 
 .department-name:active {
@@ -94,13 +94,13 @@ body {
 .department-name div {
 	height: 56px;
 	width: 56px;
-	background: #000;
+	background: #050208;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-shadow: 0 2px 8px 0 #6c63ff33;
-	border: 2px solid #6c63ff44;
+	box-shadow: 0 2px 8px 0 rgba(157, 0, 255, 0.3);
+	border: 2px solid rgba(157, 0, 255, 0.4);
 	margin-right: 10px;
 }
 
@@ -109,8 +109,8 @@ body {
 	height: 44px;
 	border-radius: 50%;
 	object-fit: cover;
-	box-shadow: 0 0 8px #6c63ff55;
-	background: #000;
+	box-shadow: 0 0 8px rgba(157, 0, 255, 0.3);
+	background: #050208;
 }
 
 .department-name span {

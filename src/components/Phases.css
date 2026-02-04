@@ -1,10 +1,11 @@
 :root {
-	--bg-dark: #020205;
-	--ember-warm: #ff4d00;
-	--crystal-cold: #00f2ff;
+	--bg-dark: #050208;
+	--accent-purple: #9d00ff;
+	--accent-magenta: #ff00c8;
+	--accent-orange: #ff6b00;
 	--text-main: #f8fafc;
 	--text-dim: #94a3b8;
-	--accent-glow: rgba(255, 77, 0, 0.4);
+	--accent-glow: rgba(157, 0, 255, 0.4);
 	--transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -19,8 +20,8 @@
 	padding: 2rem;
 	background: radial-gradient(
 		circle at 50% 50%,
-		#0a0a1a 0%,
-		#020205 100%
+		#0a0410 0%,
+		#050208 100%
 	);
 	perspective: 1000px;
 }
@@ -42,9 +43,9 @@
 	z-index: 10;
 	padding: 0.75rem 1.5rem;
 	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 77, 0, 0.3);
+	border: 1px solid rgba(157, 0, 255, 0.3);
 	border-radius: 100px;
-	color: var(--ember-warm);
+	color: var(--accent-magenta);
 	font-family: "JetBrains Mono", monospace;
 	font-size: 0.85rem;
 	text-transform: uppercase;
@@ -59,9 +60,9 @@
 }
 
 .capsule:hover {
-	border-color: var(--crystal-cold);
-	color: var(--crystal-cold);
-	box-shadow: 0 10px 40px -10px rgba(0, 242, 255, 0.3);
+	border-color: var(--accent-magenta);
+	color: var(--accent-magenta);
+	box-shadow: 0 10px 40px -10px rgba(255, 0, 200, 0.3);
 	transform: translateY(-5px) scale(1.05);
 }
 

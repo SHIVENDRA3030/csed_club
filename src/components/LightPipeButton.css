@@ -1,9 +1,9 @@
 :root {
-	--bg-color: #050505;
-	--pipe-core: #00f2ff;
-	--pipe-glow: rgba(0, 242, 255, 0.4);
+	--bg-color: #050208;
+	--pipe-core: #ff00c8;
+	--pipe-glow: rgba(255, 0, 200, 0.4);
 	--glass-shine: rgba(255, 255, 255, 0.15);
-	--accent-dim: #004246;
+	--accent-dim: #9d00ff;
 	--transition-speed: 0.4s;
 	--bezier: cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -27,12 +27,12 @@
 	align-items: center;
 	justify-content: center;
 	padding: 24px 64px;
-	background: #0a0a0a;
+	background: #0a0410;
 	border-radius: 4px;
 	overflow: hidden;
 	transition: transform var(--transition-speed) var(--bezier);
 	transform-style: preserve-3d;
-	box-shadow: 0 8px 32px rgba(0, 242, 255, 0.1);
+	box-shadow: 0 8px 32px rgba(255, 0, 200, 0.1);
 }
 
 /* Light Pipe Borders */
@@ -147,7 +147,7 @@
 /* Hover States */
 .vp-lightpipe-btn:hover .vp-btn-container {
 	transform: translateY(-2px) rotateX(5deg);
-	box-shadow: 0 12px 48px rgba(0, 242, 255, 0.2);
+	box-shadow: 0 12px 48px rgba(255, 0, 200, 0.2);
 }
 
 .vp-lightpipe-btn:hover .vp-pipe-top,

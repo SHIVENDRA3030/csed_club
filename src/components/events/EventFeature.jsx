@@ -19,20 +19,43 @@ const EventFeature = ({
   const videoSources = [
     videoUrl,
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
     "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
   ].filter(Boolean); // Remove any null/undefined values
 
   const handleVideoError = (event) => {
-    console.error("Error loading video:", event.target.error);
+    const mediaError = event.target.error;
+    let errorMsg = "Unknown error";
+
+    if (mediaError) {
+      switch (mediaError.code) {
+        case mediaError.MEDIA_ERR_ABORTED:
+          errorMsg = "Video loading was aborted";
+          break;
+        case mediaError.MEDIA_ERR_NETWORK:
+          errorMsg = "Network error while loading video";
+          break;
+        case mediaError.MEDIA_ERR_DECODE:
+          errorMsg = "Video codec error";
+          break;
+        case mediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+          errorMsg = "Video format not supported";
+          break;
+        default:
+          errorMsg = `Error code: ${mediaError.code}`;
+      }
+    }
+
+    console.error("Error loading video:", errorMsg);
     console.log("Video source:", event.target.src);
     console.log("Current source index:", currentVideoSource);
-    
+
     // Try next video source if available
     if (currentVideoSource < videoSources.length - 1) {
+      console.log(`Trying fallback source ${currentVideoSource + 1}...`);
       setCurrentVideoSource(prev => prev + 1);
       setVideoError(false);
     } else {
+      console.warn("All video sources failed");
       setVideoError(true);
     }
   };
@@ -43,12 +66,26 @@ const EventFeature = ({
     setVideoError(false);
   };
 
+  // Effect to initialize and log video sources
+  useEffect(() => {
+    console.log('EventFeature initialized with:', {
+      providedVideoUrl: videoUrl,
+      availableSources: videoSources,
+      totalSources: videoSources.length
+    });
+  }, []);
+
   // Effect to handle video source changes
   useEffect(() => {
     if (videoRef.current && currentVideoSource < videoSources.length) {
+      const src = videoSources[currentVideoSource];
+      console.log(`Loading video source ${currentVideoSource}: ${src}`);
+
+      // Reset video element
+      videoRef.current.src = src;
       videoRef.current.load(); // Reload the video with new source
     }
-  }, [currentVideoSource, videoSources.length]);
+  }, [currentVideoSource, videoSources]);
 
   // Effect to start video playing when loaded
   useEffect(() => {
@@ -91,8 +128,9 @@ const EventFeature = ({
             setHoveredMedia(null);
           }}
         >
-          {!videoError ? (
+          {!videoError && videoSources.length > 0 ? (
             <video
+              key={`video-${currentVideoSource}`}
               ref={videoRef}
               src={videoSources[currentVideoSource]}
               className={`media-video ${hoveredMedia === 'video' ? 'media-hovered' : ''} ${hoveredMedia === 'image' ? 'media-dimmed' : ''}`}
@@ -113,22 +151,30 @@ const EventFeature = ({
             <div className="video-fallback" style={{
               width: '100%',
               height: '100%',
-              backgroundColor: '#21262d',
+              backgroundColor: '#050208',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#c9d1d9',
               borderRadius: '0.75rem',
-              border: '2px solid rgba(110, 118, 129, 0.2)'
+              border: '2px solid rgba(157, 0, 255, 0.2)',
+              padding: '20px'
             }}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="1.5" style={{ marginBottom: '10px' }}>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ff00c8" strokeWidth="1.5" style={{ marginBottom: '10px' }}>
                 <path d="m22 2-20 20M7 7l10 10M2 22l20-20"/>
               </svg>
-              <p style={{ margin: '0 0 5px 0', fontSize: '16px' }}>Video temporarily unavailable</p>
-              <p style={{ margin: '0', fontSize: '12px', opacity: '0.7' }}>
-                Tried {currentVideoSource + 1} of {videoSources.length} sources
+              <p style={{ margin: '0 0 5px 0', fontSize: '16px', fontWeight: '600' }}>Video unavailable</p>
+              <p style={{ margin: '0 0 8px 0', fontSize: '12px', opacity: '0.7', textAlign: 'center' }}>
+                {videoSources.length > 0
+                  ? `Tried ${currentVideoSource + 1} of ${videoSources.length} sources`
+                  : 'No video source provided'}
               </p>
+              {videoSources.length === 0 && (
+                <p style={{ margin: '0', fontSize: '11px', opacity: '0.6', textAlign: 'center' }}>
+                  Please provide a valid video URL
+                </p>
+              )}
             </div>
           )}
         </div>

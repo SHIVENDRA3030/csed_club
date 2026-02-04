@@ -2,12 +2,12 @@
 
 .faq-section {
 	min-height: 100vh;
-	background-color: black;
+	background-color: #050208;
 	padding: 80px 20px;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	position: relative;
 	overflow: hidden;
-	box-shadow: 0 -4px 16px rgba(0, 0, 255, 0.274);
+	box-shadow: 0 -4px 16px rgba(157, 0, 255, 0.174);
 }
 
 /* Floating Background Shapes */
@@ -179,9 +179,9 @@
 	transform: translateX(-50%);
 	width: 80px;
 	height: 4px;
-	background: linear-gradient(90deg, #64ffda, #c77dff);
+	background: linear-gradient(90deg, #9d00ff, #ff00c8);
 	border-radius: 2px;
-	box-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+	box-shadow: 0 0 10px rgba(157, 0, 255, 0.5);
 }
 
 .faq-list {
@@ -192,7 +192,7 @@
 
 .faq-item {
 	background: rgba(26, 26, 46, 0.8);
-	border: 1px solid rgba(100, 255, 218, 0.2);
+	border: 1px solid rgba(157, 0, 255, 0.2);
 	border-radius: 16px;
 	overflow: hidden;
 	cursor: pointer;
@@ -204,15 +204,15 @@
 .faq-item:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-	border-color: rgba(100, 255, 218, 0.4);
+	border-color: rgba(157, 0, 255, 0.4);
 	background: rgba(26, 26, 46, 0.9);
 }
 
 .faq-item.active {
 	background: rgba(22, 33, 62, 0.95);
-	border-color: rgba(100, 255, 218, 0.6);
+	border-color: rgba(157, 0, 255, 0.6);
 	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5),
-		0 0 20px rgba(100, 255, 218, 0.2);
+		0 0 20px rgba(157, 0, 255, 0.2);
 }
 
 .faq-question {
@@ -225,12 +225,12 @@
 }
 
 .faq-item:hover .faq-question {
-	background: rgba(100, 255, 218, 0.05);
+	background: rgba(157, 0, 255, 0.05);
 }
 
 .faq-item.active .faq-question {
-	background: rgba(100, 255, 218, 0.1);
-	border-bottom: 1px solid rgba(100, 255, 218, 0.3);
+	background: rgba(157, 0, 255, 0.1);
+	border-bottom: 1px solid rgba(157, 0, 255, 0.3);
 }
 
 .faq-question h3 {
@@ -256,10 +256,10 @@
 	left: 50%;
 	width: 16px;
 	height: 2px;
-	background: #64ffda;
+	background: #ff00c8;
 	border-radius: 1px;
 	transition: all 0.3s ease;
-	box-shadow: 0 0 5px rgba(100, 255, 218, 0.5);
+	box-shadow: 0 0 5px rgba(255, 0, 200, 0.5);
 }
 
 .faq-icon span:first-child {
@@ -385,22 +385,22 @@
 }
 
 .faq-section::-webkit-scrollbar-thumb {
-	background: rgba(100, 255, 218, 0.3);
+	background: rgba(157, 0, 255, 0.3);
 	border-radius: 4px;
 	transition: background 0.3s ease;
 }
 
 .faq-section::-webkit-scrollbar-thumb:hover {
-	background: rgba(100, 255, 218, 0.5);
+	background: rgba(157, 0, 255, 0.5);
 }
 
 /* Additional glow effects for dark theme */
 .faq-item:hover {
 	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
-		0 0 15px rgba(100, 255, 218, 0.1);
+		0 0 15px rgba(157, 0, 255, 0.1);
 }
 
 .faq-item.active {
 	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5),
-		0 0 25px rgba(100, 255, 218, 0.2);
+		0 0 25px rgba(157, 0, 255, 0.2);
 }

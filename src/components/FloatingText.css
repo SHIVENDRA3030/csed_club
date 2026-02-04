@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&family=JetBrains+Mono:wght@300&display=swap");
 
 :root {
-	--bg-color: #020202;
+	--bg-color: #050208;
 	--titanium: #a1a1a1;
 	--grid-color: rgba(255, 255, 255, 0.03);
-	--glow: rgba(255, 255, 255, 0.1);
+	--glow: rgba(157, 0, 255, 0.1);
 	--transition-slow: 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 	--mx: 0deg;
 	--my: 0deg;
@@ -26,7 +26,7 @@
 	padding: 0 8%;
 	perspective: 2000px;
 	overflow: hidden;
-	background: radial-gradient(circle at 50% 50%, #080808 0%, #020202 100%);
+	background: radial-gradient(circle at 50% 50%, #0a0410 0%, #050208 100%);
 }
 
 /* --- BACKGROUND ARCHITECTURE --- */
