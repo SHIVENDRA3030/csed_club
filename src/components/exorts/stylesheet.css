@@ -1,192 +1,41 @@
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-Medium.eot');
-    src: local('Exorts Compressed Medium'), local('exortscompressed-Medium'),
-        url('exortscompressed-Medium.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-Medium.woff2') format('woff2'),
-        url('exortscompressed-Medium.woff') format('woff'),
-        url('exortscompressed-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed Semi';
-    src: url('exortscompressed-SemiBold.eot');
-    src: local('Exorts Compressed Semi Bold'), local('exortscompressed-SemiBold'),
-        url('exortscompressed-SemiBold.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-SemiBold.woff2') format('woff2'),
-        url('exortscompressed-SemiBold.woff') format('woff'),
-        url('exortscompressed-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
+/* Exorts Compressed - Optimized for WOFF2 only with font-display: swap */
 
 @font-face {
     font-family: 'Exorts Compressed';
-    src: url('exortscompressed-Light.eot');
-    src: local('Exorts Compressed Light'), local('exortscompressed-Light'),
-        url('exortscompressed-Light.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-Light.woff2') format('woff2'),
-        url('exortscompressed-Light.woff') format('woff'),
-        url('exortscompressed-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed Semi';
-    src: url('exortscompressed-SemiBoldItalic.eot');
-    src: local('Exorts Compressed Semi Bold Italic'), local('exortscompressed-SemiBoldItalic'),
-        url('exortscompressed-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-SemiBoldItalic.woff2') format('woff2'),
-        url('exortscompressed-SemiBoldItalic.woff') format('woff'),
-        url('exortscompressed-SemiBoldItalic.ttf') format('truetype');
-    font-weight: 600;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-MediumItalic.eot');
-    src: local('Exorts Compressed Medium Italic'), local('exortscompressed-MediumItalic'),
-        url('exortscompressed-MediumItalic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-MediumItalic.woff2') format('woff2'),
-        url('exortscompressed-MediumItalic.woff') format('woff'),
-        url('exortscompressed-MediumItalic.ttf') format('truetype');
-    font-weight: 500;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-BoldItalic.eot');
-    src: local('Exorts Compressed Bold Italic'), local('exortscompressed-BoldItalic'),
-        url('exortscompressed-BoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-BoldItalic.woff2') format('woff2'),
-        url('exortscompressed-BoldItalic.woff') format('woff'),
-        url('exortscompressed-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed Extra';
-    src: url('exortscompressed-ExtraLight.eot');
-    src: local('Exorts Compressed Extra Light'), local('exortscompressed-ExtraLight'),
-        url('exortscompressed-ExtraLight.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-ExtraLight.woff2') format('woff2'),
-        url('exortscompressed-ExtraLight.woff') format('woff'),
-        url('exortscompressed-ExtraLight.ttf') format('truetype');
-    font-weight: 200;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-Black.eot');
-    src: local('Exorts Compressed Black'), local('exortscompressed-Black'),
-        url('exortscompressed-Black.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-Black.woff2') format('woff2'),
-        url('exortscompressed-Black.woff') format('woff'),
-        url('exortscompressed-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-Bold.eot');
-    src: local('Exorts Compressed Bold'), local('exortscompressed-Bold'),
-        url('exortscompressed-Bold.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-Bold.woff2') format('woff2'),
-        url('exortscompressed-Bold.woff') format('woff'),
-        url('exortscompressed-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-Italic.eot');
-    src: local('Exorts Compressed Italic'), local('exortscompressed-Italic'),
-        url('exortscompressed-Italic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-Italic.woff2') format('woff2'),
-        url('exortscompressed-Italic.woff') format('woff'),
-        url('exortscompressed-Italic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-BlackItalic.eot');
-    src: local('Exorts Compressed Black Italic'), local('exortscompressed-BlackItalic'),
-        url('exortscompressed-BlackItalic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-BlackItalic.woff2') format('woff2'),
-        url('exortscompressed-BlackItalic.woff') format('woff'),
-        url('exortscompressed-BlackItalic.ttf') format('truetype');
-    font-weight: 900;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed Extra';
-    src: url('exortscompressed-ExtraBoldItalic.eot');
-    src: local('Exorts Compressed Extra Bold Italic'), local('exortscompressed-ExtraBoldItalic'),
-        url('exortscompressed-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-ExtraBoldItalic.woff2') format('woff2'),
-        url('exortscompressed-ExtraBoldItalic.woff') format('woff'),
-        url('exortscompressed-ExtraBoldItalic.ttf') format('truetype');
-    font-weight: 800;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed Extra';
-    src: url('exortscompressed-ExtraBold.eot');
-    src: local('Exorts Compressed Extra Bold'), local('exortscompressed-ExtraBold'),
-        url('exortscompressed-ExtraBold.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-ExtraBold.woff2') format('woff2'),
-        url('exortscompressed-ExtraBold.woff') format('woff'),
-        url('exortscompressed-ExtraBold.ttf') format('truetype');
-    font-weight: 800;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed Extra';
-    src: url('exortscompressed-ExtraLightItalic.eot');
-    src: local('Exorts Compressed Extra Light Italic'), local('exortscompressed-ExtraLightItalic'),
-        url('exortscompressed-ExtraLightItalic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-ExtraLightItalic.woff2') format('woff2'),
-        url('exortscompressed-ExtraLightItalic.woff') format('woff'),
-        url('exortscompressed-ExtraLightItalic.ttf') format('truetype');
-    font-weight: 200;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-LightItalic.eot');
-    src: local('Exorts Compressed Light Italic'), local('exortscompressed-LightItalic'),
-        url('exortscompressed-LightItalic.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-LightItalic.woff2') format('woff2'),
-        url('exortscompressed-LightItalic.woff') format('woff'),
-        url('exortscompressed-LightItalic.ttf') format('truetype');
-    font-weight: 300;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Exorts Compressed';
-    src: url('exortscompressed-Regular.eot');
-    src: local('Exorts Compressed'), local('exortscompressed-Regular'),
-        url('exortscompressed-Regular.eot?#iefix') format('embedded-opentype'),
-        url('exortscompressed-Regular.woff2') format('woff2'),
-        url('exortscompressed-Regular.woff') format('woff'),
-        url('exortscompressed-Regular.ttf') format('truetype');
+    src: url('exortscompressed-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
+@font-face {
+    font-family: 'Exorts Compressed';
+    src: url('exortscompressed-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exorts Compressed';
+    src: url('exortscompressed-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exorts Compressed';
+    src: url('exortscompressed-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exorts Compressed';
+    src: url('exortscompressed-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}

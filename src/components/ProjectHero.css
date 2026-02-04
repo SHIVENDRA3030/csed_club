@@ -4,12 +4,18 @@
 
 @font-face {
 	font-family: "Exorts Compressed";
-	src: url("exorts/exortscompressed-Black.ttf"),
-		url("exorts/exortscompressed-Bold.ttf"),
-		url("exorts/exortscompressed-Regular.ttf"),
-		url("exorts/exortscompressed-Medium.ttf"),
-		url("exorts/exortscompressed-Medium.ttf"),
-		url("exorts/exortscompressed-SemiBold.ttf");
+	src: url("exorts/exortscompressed-Black.woff2") format("woff2");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Exorts Compressed";
+	src: url("exorts/exortscompressed-Bold.woff2") format("woff2");
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
 }
 
 :root {
@@ -53,12 +59,14 @@ body {
 	position: relative;
 	overflow: hidden;
 }
+
 .project_letter {
 	position: relative;
 	font-family: "Exorts Compressed";
 	font-size: clamp(150px, 20vw, 450px);
 	top: 0;
 }
+
 .project_slogan {
 	font-family: "Ubuntu", sans-serif;
 	font-size: var(--font-size);
@@ -81,11 +89,9 @@ body {
 }
 
 .words {
-	background: linear-gradient(
-		90deg,
-		rgb(136, 138, 229) 0%,
-		rgb(30, 10, 65) 100%
-	);
+	background: linear-gradient(90deg,
+			rgb(136, 138, 229) 0%,
+			rgb(30, 10, 65) 100%);
 	position: relative;
 	font-weight: bold;
 	background-size: cover;
@@ -119,13 +125,16 @@ body {
 		font-size: clamp(16px, 3.7vh, 32px);
 		margin-bottom: -20px;
 	}
+
 	.project_slogan {
 		font-size: var(--font-size-responsive);
 	}
+
 	.words_container {
 		height: clamp(33px, 4.65vh, 48px);
 		margin-top: -3px;
 	}
+
 	#word1 {
 		margin-top: 2px;
 	}
