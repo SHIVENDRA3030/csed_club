@@ -15,10 +15,10 @@ const EventFeature = ({
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [currentVideoSource, setCurrentVideoSource] = useState(0);
 
-  // Multiple fallback video sources
+  // Multiple fallback video sources - prioritize Supabase URL
   const videoSources = [
+    "https://hizlgacbnsyhtfohpbwz.supabase.co/storage/v1/object/public/media/projects/projectHome.mp4",
     videoUrl,
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
   ].filter(Boolean); // Remove any null/undefined values
 
@@ -138,6 +138,7 @@ const EventFeature = ({
               muted
               autoPlay
               playsInline
+              crossOrigin="anonymous"
               onError={handleVideoError}
               onLoadedData={handleVideoLoaded}
               onCanPlay={() => console.log("Video can play")}
